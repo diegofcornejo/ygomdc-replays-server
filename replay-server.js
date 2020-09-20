@@ -31,8 +31,6 @@ app.get('/replay', (req, res) => {
                     replay['date'] = value['date_time'];
                     replay['player1'] = players[0];
 		    replay['player2'] = players[1];
-		    replay['player3'] = players[2] || 'N/A';
-		    replay['player4'] = players[3] || 'N/A';
                     cb(null, replay);
                 });
             }, function (error, results) {
