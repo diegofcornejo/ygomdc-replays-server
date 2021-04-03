@@ -3,7 +3,12 @@ const express = require('express')
 var cors = require('cors')
 const async = require("async");
 const redis = require("redis");
-const client = redis.createClient();
+// const client = redis.createClient();
+const client = redis.createClient({
+    host: process.env.REDIS_YGOPRO_HOST,
+    port: process.env.REDIS_YGOPRO_PORT,
+    password: process.env.REDIS_YGOPRO_PASSWORD
+});
 
 client.on("error", function(error) {
     console.error(error);
