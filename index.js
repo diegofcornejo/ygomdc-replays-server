@@ -24,6 +24,7 @@ app.get('/replay', (req, res) => {
     client.keys('replay:*', function (err, keys) {
         if (err) return console.log(err);
         if (keys) {
+		console.log(keys)
             async.map(keys, function (key, cb) {
                 client.hmget(key, ["player_names","date_time"], function (error, value) {
                     if (error) return cb(error);
