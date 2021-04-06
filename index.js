@@ -26,14 +26,14 @@ app.get('/replay', (req, res) => {
         if (keys) {
             // console.log(keys)
             async.map(keys, function (key, cb) {
-                client.hgetall(key, function (error, value) {
+                client.hmget(key, ["player_names","date_time"], function (error, value) {
                     if (error) return cb(error);
                     // console.log(value)
-		    var players = value.player_names.replace(/\s/g, '');
+		    var players = value[0].replace(/\s/g, '');
 		    players = players.split("VS");
                     var replay = {};
                     replay['recid'] = key.substring(7, key.length);
-                    replay['date'] = value['date_time'];
+                    replay['date'] = value[1];
                     replay['player1'] = players[0];
 		    replay['player2'] = players[1];
                     cb(null, replay);
